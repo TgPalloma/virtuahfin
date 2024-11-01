@@ -1,0 +1,19 @@
+{
+  "pessoajuridica": [
+    {
+      "razaosocial": "Palloma Tech",
+      "contato": "Palloma Muller",
+      "cadastro": "22/10/1986"
+    },
+    {
+      "razaosocial": "Virtuah Assessoria",
+      "contato": "Raquel Santos",
+      "cadastro": "04/05/1986"
+    },
+    {
+      "razaosocial": "Nina Pets",
+      "contato": "Miriam Muller",
+      "cadastro": "14/08/1988"
+    }
+  ]
+}

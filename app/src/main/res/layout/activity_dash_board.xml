@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.DashBoardActivity">
+
+    <ScrollView
+        android:id="@+id/dashboard_v_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/main_backgroud_degradee"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/dashboard_iv_logo_virtuah"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        app:layout_constraintVertical_bias="0.15"
+        android:src="@drawable/logo_virtuah_colorido"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/dashboard_tv_app_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/dashboard_iv_logo_virtuah"
+        app:layout_constraintEnd_toEndOf="@id/dashboard_iv_logo_virtuah"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_iv_logo_virtuah"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dashboard_bt_cadastro_juridico"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.1"
+        android:layout_marginHorizontal="12dp"
+        android:background="@drawable/main_button_model"
+        android:text="@string/main_cadastro_juridico"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_tv_app_title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dashboard_bt_gestao_propostas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/main_button_model"
+        android:text="@string/propostas"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/dashboard_bt_cadastro_juridico"
+        app:layout_constraintEnd_toEndOf="@id/dashboard_bt_cadastro_juridico"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_bt_cadastro_juridico" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dashboard_bt_registro_diario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/main_button_model"
+        android:text="@string/registro_diario"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/dashboard_bt_cadastro_juridico"
+        app:layout_constraintEnd_toEndOf="@id/dashboard_bt_cadastro_juridico"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_bt_gestao_propostas"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dashboard_bt_area_financas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/main_button_model"
+        android:text="@string/rea_de_financas"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_bt_registro_diario"
+        app:layout_constraintStart_toStartOf="@id/dashboard_bt_cadastro_juridico"
+        app:layout_constraintEnd_toEndOf="@id/dashboard_bt_cadastro_juridico"/>
+
+    <TextView
+        android:id="@+id/main_tv_created_by"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/createdby"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/dashboard_v_background"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
