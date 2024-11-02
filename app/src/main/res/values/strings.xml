@@ -24,4 +24,5 @@
     <string name="valor_parceiro">Valor do Parceiro</string>
     <string name="parceiro">Escolher Parceiro de Negócios</string>
     <string name="adicionar_parceiro_comercial">Adicionar um Parceiro Comercial</string>
+    <string name="cadastrar_proposta">Cadastrar Proposta</string>
 </resources>
