@@ -25,4 +25,9 @@
     <string name="parceiro">Escolher Parceiro de Negócios</string>
     <string name="adicionar_parceiro_comercial">Adicionar um Parceiro Comercial</string>
     <string name="cadastrar_proposta">Cadastrar Proposta</string>
+    <string name="data_prevista_para_termino">Data Prevista para Término</string>
+    <string name="data_de_inicio">Data de Início</string>
+    <string name="forma_de_pagamento">Forma de Pagamento</string>
+    <string name="horas_dia">Horas/dia</string>
+    <string name="descricao_do_servico">Descrição do Serviço</string>
 </resources>

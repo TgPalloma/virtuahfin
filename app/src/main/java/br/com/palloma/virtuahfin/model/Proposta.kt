@@ -9,35 +9,17 @@ class Proposta(
     val valorAssistente: Double,
     val descricaoServico: String,
     val dataInicio: LocalDate,
-    val dataFinalPrevista: LocalDate,
     val horasDiarias: Int,
     val formaPagamento: FormaDePagamento
 ) {
 
     private var parceiro: PessoaJuridica? = null
-        get
+        get set
     private var valorParceiro: Double? = null
-        get
-
-    private var dataFinalizaçao: LocalDate? = null
         get set
 
-    constructor(
-        cliente: PessoaJuridica,
-        assistente: PessoaJuridica,
-        valorCliente: Double,
-        valorAssistente: Double,
-        parceiro: PessoaJuridica,
-        valorParceiro: Double,
-        descricaoServico: String,
-        dataInicio: LocalDate,
-        dataFinalPrevista: LocalDate,
-        horasDiarias: Int,
-        formaPagamento: FormaDePagamento): this(
-        cliente, assistente, valorCliente, valorAssistente, descricaoServico, dataInicio, dataFinalPrevista,
-        horasDiarias, formaPagamento
-    ) {
-            this.parceiro = parceiro
-            this.valorParceiro = valorParceiro
-    }
+    private var dataFinalPrevista: LocalDate? = null
+        get set
+    private var dataFinalizaçao: LocalDate? = null
+        get set
 }

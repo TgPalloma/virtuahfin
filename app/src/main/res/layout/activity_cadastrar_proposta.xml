@@ -8,44 +8,315 @@
     android:background="@drawable/main_backgroud_degradee"
     tools:context=".ui.activity.CadastrarPropostaActivity">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/cadastro_proposta_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Serviço"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Período"/>
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/cadastro_proposta_tab_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_tabs"
-        app:layout_constraintStart_toStartOf="@id/cadastro_proposta_tabs"
-        app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_tabs"
-        app:layout_constraintBottom_toTopOf="@id/cadastro_proposta_botao_cadastrar_proposta" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/cadastro_proposta_botao_cadastrar_proposta"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/main_button_model"
-        android:text="@string/cadastrar_proposta"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_cliente"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/cadastro_proposta_auto_complete_cliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cliente"
+                    android:inputType="none"
+                    android:outlineProvider="background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_valor_cliente"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_cliente"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_cliente">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cadastro_proposta_valor_cliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/valor_cliente"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_assistente"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_til_cliente"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_cliente"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_valor_cliente">
+
+                <AutoCompleteTextView
+                    android:id="@+id/cadastro_proposta_auto_complete_assistente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/assistente"
+                    android:inputType="none"
+                    android:outlineProvider="background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_valor_assistente"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_assistente"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_assistente">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cadastro_proposta_valor_assistente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/valor_assistente"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cadastro_proposta_checkbox_parceiro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/adicionar_parceiro_comercial"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_assistente"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_valor_assistente" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_parceiro"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_til_assistente"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_assistente"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_checkbox_parceiro">
+
+                <AutoCompleteTextView
+                    android:id="@+id/cadastro_proposta_auto_complete_parceiro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/parceiro"
+                    android:inputType="none"
+                    android:outlineProvider="background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_valor_parceiro"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:visibility="gone"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_parceiro"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_parceiro">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cadastro_proposta_valor_parceiro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/valor_parceiro"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_descricao"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_til_assistente"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_assistente"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_valor_parceiro">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cadastro_proposta_descricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:hint="@string/descricao_do_servico"
+                    android:inputType="none"
+                    android:maxLength="150"
+                    android:outlineProvider="background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_hora_diaria"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintStart_toEndOf="@id/cadastro_proposta_til_valor_cliente"
+                app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_til_cliente"
+                app:layout_constraintTop_toTopOf="@id/cadastro_proposta_til_valor_cliente">
+
+                <AutoCompleteTextView
+                    android:id="@+id/cadastro_proposta_auto_hora_diaria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/horas_dia"
+                    android:inputType="none"
+                    android:outlineProvider="background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_forma_pagamento"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintEnd_toEndOf="@+id/cadastro_proposta_til_descricao"
+                app:layout_constraintStart_toStartOf="@+id/cadastro_proposta_til_descricao"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_descricao">
+
+                <AutoCompleteTextView
+                    android:id="@+id/cadastro_proposta_auto_forma_pagamento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/forma_de_pagamento"
+                    android:inputType="none"
+                    android:outlineProvider="background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_data_inicio"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_til_descricao"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_descricao"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_forma_pagamento">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cadastro_proposta_auto_data_inicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="@string/data_de_inicio"
+                    android:outlineProvider="background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cadastro_proposta_til_data_previsao_termino"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/orange_700"
+                app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
+                app:cursorColor="@color/orange_700"
+                app:hintTextColor="@color/orange_700"
+                app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_til_descricao"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_descricao"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_data_inicio">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cadastro_proposta_auto_data_previsao_termino"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="@string/data_prevista_para_termino"
+                    android:inputType="none"
+                    android:outlineProvider="background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cadastro_proposta_botao_cadastrar_proposta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/main_button_model"
+                android:text="@string/cadastrar_proposta"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_descricao"
+                app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_til_descricao"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_data_previsao_termino"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
