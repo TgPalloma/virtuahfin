@@ -25,6 +25,9 @@ class PessoaJuridicaActivity : AppCompatActivity() {
         ActivityPessoaJuridicaBinding.inflate(layoutInflater)
     }
 
+    private val pessoaJuridicaDao = PessoaJuridicaDao()
+    private val conversorDeDatas = ConversorDeDatas()
+
     private lateinit var tvNomeFantasia: TextView
     private lateinit var tvRazaoSocial: TextView
     private lateinit var tvCnpj: TextView
@@ -55,6 +58,7 @@ class PessoaJuridicaActivity : AppCompatActivity() {
         }
 
         supportActionBar?.hide()
+
         index = verificaIntent()
 
         configuraViews()
@@ -67,18 +71,14 @@ class PessoaJuridicaActivity : AppCompatActivity() {
     private fun verificaIntent(): Int {
         val index = intent.getIntExtra("indexPessoaJuridica", 1)
         Log.d("VemIndex", index.toString())
-        atribuiPessoaJuridica()
+        pessoaJuridica = pessoaJuridicaDao.acessarLista()[index]
         return index
     }
 
     override fun onResume() {
         super.onResume()
-        atribuiPessoaJuridica()
+        pessoaJuridica = pessoaJuridicaDao.acessarLista()[index]
         defineConteudoDasViews()
-    }
-
-    private fun atribuiPessoaJuridica() {
-        pessoaJuridica = PessoaJuridicaDao().acessarLista()[index]
     }
 
     private fun configuraBotaoExcluir() {
@@ -95,7 +95,7 @@ class PessoaJuridicaActivity : AppCompatActivity() {
             )
             .setTitle("Confirmar Exclusão")
             .setPositiveButton("Excluir") { dialog, which ->
-                PessoaJuridicaDao().excluir(pessoaJuridica)
+                pessoaJuridicaDao.excluir(pessoaJuridica)
                 finish()
             }.setNegativeButton("Cancelar") { dialog, which ->
                 Toast.makeText(this, "Nada foi excluído", Toast.LENGTH_LONG).show()
@@ -114,7 +114,7 @@ class PessoaJuridicaActivity : AppCompatActivity() {
 
     private fun configuraSwitchStatus() {
         swStatus.setOnCheckedChangeListener { _, isChecked ->
-            PessoaJuridicaDao().ativaDesativaCadastro(pessoaJuridica, isChecked)
+            pessoaJuridicaDao.ativaDesativaCadastro(pessoaJuridica, isChecked)
             tvStatus.text = pessoaJuridica.statusToString()
         }
     }
@@ -147,7 +147,7 @@ class PessoaJuridicaActivity : AppCompatActivity() {
         tvEmail.text = pessoaJuridica.email
 
         tvTipoContrato.text = pessoaJuridica.tipo.toString()
-        tvDataCadastro.text = ConversorDeDatas().converterLocalDateParaString(pessoaJuridica.dataDeCadastro)
+        tvDataCadastro.text = conversorDeDatas.converterLocalDateParaString(pessoaJuridica.dataDeCadastro)
 
         swStatus.isChecked = pessoaJuridica.status
         tvStatus.text = pessoaJuridica.statusToString()
