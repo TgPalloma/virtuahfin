@@ -37,7 +37,7 @@ class ListaPessoaJuridicaAdapter (
             etNomeResponsavel.text = pessoaJuridica.nomeResponsavel
 
             val etDataDeCadastro = binding.itemPessoaJuridicaDataCadastro
-            etDataDeCadastro.text = conversorDeDatas.converterDataParaString(pessoaJuridica.dataDeCadastro)
+            etDataDeCadastro.text = conversorDeDatas.converterLocalDateParaString(pessoaJuridica.dataDeCadastro)
             //pessoaJuridica.dataDeCadastro.toString()
 
             val cardViewLayout = binding.itemPessoaJuridicaCardviewLayout

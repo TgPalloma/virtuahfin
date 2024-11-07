@@ -1,5 +1,6 @@
 package br.com.palloma.virtuahfin.ui.activity
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -8,15 +9,19 @@ import android.widget.CheckBox
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.com.palloma.virtuahfin.R
 import br.com.palloma.virtuahfin.dao.PessoaJuridicaDao
+import br.com.palloma.virtuahfin.dao.PropostaDao
 import br.com.palloma.virtuahfin.databinding.ActivityCadastrarPropostaBinding
 import br.com.palloma.virtuahfin.model.FormaDePagamento
 import br.com.palloma.virtuahfin.model.PessoaJuridica
 import br.com.palloma.virtuahfin.model.TipoContrato
+import br.com.palloma.virtuahfin.util.ConversorDeDatas
 import com.google.android.material.textfield.TextInputLayout
+import java.util.Calendar
 
 class CadastrarPropostaActivity : AppCompatActivity() {
 
@@ -25,26 +30,34 @@ class CadastrarPropostaActivity : AppCompatActivity() {
     }
 
     private val pessoaJuridicaDao = PessoaJuridicaDao()
+    private val propostaDao = PropostaDao()
+    private  val calendar = Calendar.getInstance()
 
     private val listaClientes = ArrayList<PessoaJuridica>()
     private val listaAssistentes = ArrayList<PessoaJuridica>()
     private val listaParceiros = ArrayList<PessoaJuridica>()
 
     private val listaFormasDePagamento = ArrayList<FormaDePagamento>()
+    private val listaHorasDia = listOf(1, 2, 3, 4, 6)
 
     private lateinit var actvClientes: AutoCompleteTextView
     private lateinit var actvAssistentes: AutoCompleteTextView
     private lateinit var actvParceiros: AutoCompleteTextView
     private lateinit var actvFormaDePagamento: AutoCompleteTextView
+    private lateinit var actvHorasDiarias: AutoCompleteTextView
 
     private lateinit var checkParceiro: CheckBox
 
     private lateinit var tilParceiro: TextInputLayout
     private lateinit var tilValorParceiro: TextInputLayout
+    private lateinit var tilDataDeInicio: TextInputLayout
 
     private lateinit var etValorCliente: EditText
     private lateinit var etValorAssistente: EditText
     private lateinit var etValoParceiro: EditText
+    private lateinit var etDataDeInicio: EditText
+
+    private lateinit var btCalendarioDataInicio: AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,13 +74,20 @@ class CadastrarPropostaActivity : AppCompatActivity() {
         configuraAdaptersNasViews()
         checkSwitchParceiro()
         configuraListaTiposDePagamento()
-        actvFormaDePagamento.setOnItemClickListener { parent, view, position, id ->
-            if (FormaDePagamento.)
+        configuraListaHorasDiarias()
+        listenerHoraEFormaDePagamento()
+
+        btCalendarioDataInicio.setOnClickListener {
+            showDatePicker(etDataDeInicio)
         }
     }
 
     override fun onResume() {
         super.onResume()
+        checkSwitchParceiro()
+        configuraListaTiposDePagamento()
+        configuraListaHorasDiarias()
+        listenerHoraEFormaDePagamento()
 
     }
 
@@ -88,15 +108,20 @@ class CadastrarPropostaActivity : AppCompatActivity() {
         actvAssistentes = binding.cadastroPropostaAutoCompleteAssistente
         actvParceiros = binding.cadastroPropostaAutoCompleteParceiro
         actvFormaDePagamento = binding.cadastroPropostaAutoFormaPagamento
+        actvHorasDiarias = binding.cadastroPropostaAutoHoraDiaria
 
         checkParceiro = binding.cadastroPropostaCheckboxParceiro
 
         tilParceiro = binding.cadastroPropostaTilParceiro
         tilValorParceiro = binding.cadastroPropostaTilValorParceiro
+        tilDataDeInicio = binding.cadastroPropostaTilDataInicio
 
         etValorCliente = binding.cadastroPropostaValorCliente
         etValorAssistente = binding.cadastroPropostaValorAssistente
         etValoParceiro = binding.cadastroPropostaValorParceiro
+        etDataDeInicio = binding.cadastroPropostaAutoDataInicio
+
+        btCalendarioDataInicio = binding.cadastroPropostaBotaoCalendarioInicio
     }
 
     private fun configuraAdaptersNasViews() {
@@ -128,6 +153,11 @@ class CadastrarPropostaActivity : AppCompatActivity() {
         actvFormaDePagamento.setAdapter(arrayAdapter)
     }
 
+    private fun configuraListaHorasDiarias() {
+        val arrayAdapter = ArrayAdapter(this, R.layout.list_item, listaHorasDia)
+        actvHorasDiarias.setAdapter(arrayAdapter)
+    }
+
     private fun configuraViewsParceiro (visivel: Boolean) {
         if (visivel){
             tilParceiro.visibility = View.VISIBLE
@@ -136,5 +166,43 @@ class CadastrarPropostaActivity : AppCompatActivity() {
             tilParceiro.visibility = View.GONE
             tilValorParceiro.visibility = View.GONE
         }
+    }
+
+    private fun listenerHoraEFormaDePagamento() {
+        actvHorasDiarias.setOnItemClickListener { _, _, position, _ ->
+            if (listaHorasDia[position] != 6) {
+                listaFormasDePagamento.clear()
+                listaFormasDePagamento.addAll(FormaDePagamento.entries)
+                configuraListaTiposDePagamento()
+                actvFormaDePagamento.setText("")
+            } else {
+                listaFormasDePagamento.clear()
+                listaFormasDePagamento.add(FormaDePagamento.MENSAL)
+                configuraListaTiposDePagamento()
+                actvFormaDePagamento.setText("")
+            }
+        }
+    }
+
+    private  fun  showDatePicker (editText: EditText) {
+        // Criar um DatePickerDialog
+        val datePickerDialog = DatePickerDialog(
+            this , { _, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                // Criar uma nova instância de calendário para armazenar a data selecionada
+                val selectedDate = Calendar.getInstance()
+                // Definir a data selecionada usando os valores recebidos da caixa de diálogo DatePicker
+                selectedDate.set(year, monthOfYear, dayOfMonth)
+                // Cria um SimpleDateFormat para formatar a data como "dd/MM/aaaa"
+                // Formata a data selecionada em uma string
+                val formattedDate = ConversorDeDatas().converterCalendarParaString(selectedDate)
+                // Atualiza o TextView para exibir a data selecionada com o prefixo "Selected Date: "
+                editText.setText(formattedDate)
+            },
+            calendar. get (Calendar.YEAR),
+            calendar. get (Calendar.MONTH),
+            calendar. get(Calendar.DAY_OF_MONTH)
+        )
+        // Mostrar a caixa de diálogo DatePicker
+        datePickerDialog.show()
     }
 }

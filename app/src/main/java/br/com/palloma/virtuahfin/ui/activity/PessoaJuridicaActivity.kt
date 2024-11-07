@@ -1,6 +1,5 @@
 package br.com.palloma.virtuahfin.ui.activity
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -148,7 +147,7 @@ class PessoaJuridicaActivity : AppCompatActivity() {
         tvEmail.text = pessoaJuridica.email
 
         tvTipoContrato.text = pessoaJuridica.tipo.toString()
-        tvDataCadastro.text = conversorDeDatas.converterDataParaString(pessoaJuridica.dataDeCadastro)
+        tvDataCadastro.text = conversorDeDatas.converterLocalDateParaString(pessoaJuridica.dataDeCadastro)
 
         swStatus.isChecked = pessoaJuridica.status
         tvStatus.text = pessoaJuridica.statusToString()

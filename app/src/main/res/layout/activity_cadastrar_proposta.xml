@@ -255,16 +255,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:clickable="true"
                 app:boxBackgroundColor="@color/white"
                 app:boxStrokeColor="@color/orange_700"
+                android:clickable="true"
                 app:boxStrokeWidthFocused="@dimen/cardview_default_elevation"
                 app:cursorColor="@color/orange_700"
                 app:hintTextColor="@color/orange_700"
-                app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_til_descricao"
                 app:layout_constraintHorizontal_weight="2"
                 app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_descricao"
-                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_forma_pagamento">
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_forma_pagamento"
+                app:layout_constraintEnd_toStartOf="@id/cadastro_proposta_botao_calendario_inicio">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/cadastro_proposta_auto_data_inicio"
@@ -274,6 +274,17 @@
                     android:hint="@string/data_de_inicio"
                     android:outlineProvider="background" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cadastro_proposta_botao_calendario_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/main_button_model"
+                app:layout_constraintStart_toEndOf="@id/cadastro_proposta_til_data_inicio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cadastro_proposta_til_data_inicio"
+                app:layout_constraintBottom_toBottomOf="@id/cadastro_proposta_til_data_inicio"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/cadastro_proposta_til_data_previsao_termino"
