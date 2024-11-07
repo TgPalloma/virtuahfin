@@ -20,8 +20,7 @@ import br.com.palloma.virtuahfin.ui.adapter.ListaPessoaJuridicaAdapter
 
 class ListaCadastroJuridicoActivity : AppCompatActivity() {
 
-    private val daoPessoaJuridica = PessoaJuridicaDao()
-    private val adapter = ListaPessoaJuridicaAdapter(this, daoPessoaJuridica.acessarLista())
+    private val adapter = ListaPessoaJuridicaAdapter(this, PessoaJuridicaDao().acessarLista())
 
     private val binding by lazy {
         ActivityListaCadastroJuridicoBinding.inflate(layoutInflater)
@@ -67,7 +66,7 @@ class ListaCadastroJuridicoActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        adapter.atualiza(daoPessoaJuridica.acessarLista())
+        adapter.atualiza(PessoaJuridicaDao().acessarLista())
         Log.d("PassouAqui", "onResume: Passou Aqui")
     }
 }

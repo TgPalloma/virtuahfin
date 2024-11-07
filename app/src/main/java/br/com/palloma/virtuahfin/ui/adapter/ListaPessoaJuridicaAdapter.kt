@@ -22,13 +22,9 @@ class ListaPessoaJuridicaAdapter (
 
     private val pessoasJuridicas = pessoajuridicas.toMutableList()
 
-
     class ViewHolder (private val binding: PessoaJuridicaListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun vincula (pessoaJuridica: PessoaJuridica, position: Int, context: Context) {
-
-            val pessoaJuridicaDao = PessoaJuridicaDao()
-            val conversorDeDatas = ConversorDeDatas()
 
             val etNomeFantasia= binding.itemPessoaJuridicaNomeFantasia
             etNomeFantasia.text = pessoaJuridica.nomeFantasia
@@ -37,7 +33,7 @@ class ListaPessoaJuridicaAdapter (
             etNomeResponsavel.text = pessoaJuridica.nomeResponsavel
 
             val etDataDeCadastro = binding.itemPessoaJuridicaDataCadastro
-            etDataDeCadastro.text = conversorDeDatas.converterLocalDateParaString(pessoaJuridica.dataDeCadastro)
+            etDataDeCadastro.text = ConversorDeDatas().converterLocalDateParaString(pessoaJuridica.dataDeCadastro)
             //pessoaJuridica.dataDeCadastro.toString()
 
             val cardViewLayout = binding.itemPessoaJuridicaCardviewLayout
@@ -53,7 +49,7 @@ class ListaPessoaJuridicaAdapter (
             swStatus.isChecked = pessoaJuridica.status
 
             swStatus.setOnCheckedChangeListener { _, isChecked ->
-                pessoaJuridicaDao.ativaDesativaCadastro(pessoaJuridica, isChecked)
+                PessoaJuridicaDao().ativaDesativaCadastro(pessoaJuridica, isChecked)
                 defineStatusDoCardView(pessoaJuridica, cardViewLayout)
                 tvStatus.text = pessoaJuridica.statusToString()
             }

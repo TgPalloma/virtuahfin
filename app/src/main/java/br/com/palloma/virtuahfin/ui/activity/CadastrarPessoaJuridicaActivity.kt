@@ -23,7 +23,7 @@ class CadastrarPessoaJuridicaActivity : AppCompatActivity() {
         ActivityCadastrarPessoaJuridicaBinding.inflate(layoutInflater)
     }
 
-    private val pessoaJuridicaDao = PessoaJuridicaDao()
+//    private val pessoaJuridicaDao = PessoaJuridicaDao()
     private lateinit var pessoaJuridica: PessoaJuridica
 
     private val listaDeTiposDeContrato = TipoContrato.entries.toTypedArray()
@@ -64,7 +64,7 @@ class CadastrarPessoaJuridicaActivity : AppCompatActivity() {
             index = intent.getIntExtra("indexPessoaJuridica", -1)
             modoCadastro = false
             Log.d("VemIndex", index.toString())
-            pessoaJuridica = pessoaJuridicaDao.acessarLista()[index]
+            pessoaJuridica = PessoaJuridicaDao().acessarLista()[index]
 
             etNomeFantasia.setText(pessoaJuridica.nomeFantasia)
             etRazaoSocial.setText(pessoaJuridica.razaoSocial)
@@ -85,10 +85,10 @@ class CadastrarPessoaJuridicaActivity : AppCompatActivity() {
     private fun configuraAcaoBotaoCadastrar() {
         btCadastrarPessoaJuridica.setOnClickListener {
             if (modoCadastro) {
-                pessoaJuridicaDao.salvar(criaPessoaJuridicaPeloFormulario())
+                PessoaJuridicaDao().salvar(criaPessoaJuridicaPeloFormulario())
                 Log.d("ModoCadastro", "Está Em Modo Cadastro")
             } else {
-                pessoaJuridicaDao.atualizar(criaPessoaJuridicaPeloFormulario(), index)
+                PessoaJuridicaDao().atualizar(criaPessoaJuridicaPeloFormulario(), index)
                 Log.d("Modo Edição", index.toString() + pessoaJuridica)
             }
             finish()
