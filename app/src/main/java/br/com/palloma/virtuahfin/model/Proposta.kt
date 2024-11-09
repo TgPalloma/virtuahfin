@@ -13,13 +13,11 @@ class Proposta(
     val formaPagamento: FormaDePagamento
 ) {
 
-    private var parceiro: PessoaJuridica? = null
-        get set
-    private var valorParceiro: Double? = null
-        get set
+    var parceiro: PessoaJuridica? = null
+    var valorParceiro: Double? = null
 
-    private var dataFinalPrevista: LocalDate? = null
-        get set
-    private var dataFinalizaçao: LocalDate? = null
-        get set
+    var dataFinalPrevista: LocalDate? = null
+    var dataFinalizaçao: LocalDate? = null
+
+    var statusAtivo: Boolean? = null
 }

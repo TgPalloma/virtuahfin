@@ -1,7 +1,9 @@
 package br.com.palloma.virtuahfin.dao
 
-import br.com.palloma.virtuahfin.model.PessoaJuridica
 import br.com.palloma.virtuahfin.model.Proposta
+import br.com.palloma.virtuahfin.util.ConversorDeDatas
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 class PropostaDao {
 
@@ -9,8 +11,33 @@ class PropostaDao {
         private val listaPropostas = mutableListOf<Proposta>()
     }
 
-    fun salvarProposta (proposta: Proposta) {
+    fun salvarProposta(proposta: Proposta) {
         listaPropostas.add(proposta)
+    }
+
+    fun acessaLista(): List<Proposta> {
+        val listaAtualizada = listaPropostas
+        return listaAtualizada.toList()
+    }
+
+    fun verificaStatus(proposta: Proposta): Boolean {
+        return proposta.dataFinalizaçao == null
+        //Se null = proposta ativa (true)
+    }
+
+    fun calcularDiasRestantes(proposta: Proposta): String  {
+
+        if (verificaStatus(proposta)) {
+            if (proposta.dataFinalPrevista != null) {
+                val diasRestantes = proposta.dataFinalPrevista!!.until(LocalDate.now(), ChronoUnit.DAYS).toInt()
+                return "Encerra em $diasRestantes corridos"
+            } else {
+                return "Sem previsão de Encerramento (Proposta Ativa)"
+            }
+        } else {
+            val dataFinalizada = ConversorDeDatas().converterLocalDateParaString(proposta.dataFinalizaçao)
+            return "Proposta finalizada em $dataFinalizada"
+        }
     }
 
 }

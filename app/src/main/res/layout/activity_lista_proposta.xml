@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_backgroud_degradee"
-    tools:context=".ui.activity.ListaCadastroJuridicoActivity">
+    tools:context=".ui.activity.ListaPropostaActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/lista_pessoa_juridica_toolbar"
+        android:id="@+id/lista_proposta_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -18,14 +18,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lista_pessoa_juridica_recyclerview"
+        android:id="@+id/lista_proposta_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/pessoa_juridica_list_item"
+        tools:listitem="@layout/proposta_list_item"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lista_pessoa_juridica_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/lista_proposta_toolbar"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

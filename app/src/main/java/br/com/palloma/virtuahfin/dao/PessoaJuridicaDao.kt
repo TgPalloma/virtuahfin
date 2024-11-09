@@ -4,7 +4,7 @@ import android.util.Log
 import br.com.palloma.virtuahfin.model.PessoaJuridica
 import br.com.palloma.virtuahfin.model.TipoContrato
 
-public class PessoaJuridicaDao {
+class PessoaJuridicaDao {
 
     companion object {
         private val listaPessoasJuridicas = mutableListOf<PessoaJuridica>()
@@ -21,6 +21,15 @@ public class PessoaJuridicaDao {
 
     fun excluir(pessoaJuridica: PessoaJuridica) {
         listaPessoasJuridicas.remove(pessoaJuridica)
+    }
+
+    fun buscarPeloCNPJ (cnpj: String): PessoaJuridica? {
+        for (pj in listaPessoasJuridicas) {
+            if (cnpj == pj.cnpj) {
+                return pj
+            }
+        }
+        return null
     }
 
     fun acessarLista() : List<PessoaJuridica> {

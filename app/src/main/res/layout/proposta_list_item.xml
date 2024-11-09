@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_proposta_cardview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        android:layout_marginHorizontal="12dp"
+        app:cardCornerRadius="12dp"
+        android:layout_marginVertical="9dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_proposta_cardview_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@drawable/cardview_list_item_actived_backgroud">
+
+            <TextView
+                android:id="@+id/item_proposta_cliente_nome_fantasia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@sample/propostas.json/proposta/cliente"
+                android:layout_margin="12dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/item_proposta_assistente_nome_resposavel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                tools:text="@sample/propostas.json/proposta/assistente"
+                app:layout_constraintStart_toStartOf="@id/item_proposta_cliente_nome_fantasia"
+                app:layout_constraintTop_toBottomOf="@id/item_proposta_cliente_nome_fantasia"/>
+
+            <TextView
+                android:id="@+id/item_proposta_parceiro_nome_responsavel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:textColor="@color/black"
+                tools:text="Qualquer um parceiro"
+                app:layout_constraintStart_toStartOf="@id/item_proposta_cliente_nome_fantasia"
+                app:layout_constraintTop_toBottomOf="@id/item_proposta_assistente_nome_resposavel" />
+
+            <TextView
+                android:id="@+id/item_proposta_hora_diaria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textAlignment="viewEnd"
+                android:layout_marginEnd="20dp"
+                app:drawableTopCompat="@drawable/ic_relogio"
+                tools:text="@sample/propostas.json/proposta/horasdiaria"
+                app:layout_constraintTop_toTopOf="@id/item_proposta_cliente_nome_fantasia"
+                app:layout_constraintBottom_toBottomOf="@id/item_proposta_parceiro_nome_responsavel"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                android:id="@+id/item_proposta_tarja_status"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="8dp"
+                tools:background="?attr/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_proposta_parceiro_nome_responsavel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/item_proposta_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Encerra em 30 dias corridos"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/item_proposta_tarja_status"
+                app:layout_constraintEnd_toEndOf="@id/item_proposta_tarja_status"
+                app:layout_constraintTop_toTopOf="@id/item_proposta_tarja_status"
+                app:layout_constraintBottom_toBottomOf="@id/item_proposta_tarja_status"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

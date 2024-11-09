@@ -2,13 +2,16 @@ package br.com.palloma.virtuahfin.ui.activity
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.com.palloma.virtuahfin.R
@@ -55,6 +58,8 @@ class CadastrarPropostaActivity : AppCompatActivity() {
     private lateinit var etDataDeInicio: EditText
     private lateinit var etDataPrevFinal: EditText
 
+    private lateinit var btCadastrarProposta: AppCompatButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -80,6 +85,16 @@ class CadastrarPropostaActivity : AppCompatActivity() {
         tilDataPrevFinal.setEndIconOnClickListener {
             mostrarSelecionadorDeDatas(etDataPrevFinal)
         }
+
+        var cliente: PessoaJuridica
+
+        btCadastrarProposta = binding.cadastroPropostaBotaoCadastrarProposta
+
+        actvClientes.setOnItemClickListener { _, _, position, _ ->
+            cliente = listaClientes[position]
+            Log.d("cliente", cliente.cnpj + " |\n " + cliente.toString())
+        }
+
     }
 
     override fun onResume() {
@@ -185,25 +200,17 @@ class CadastrarPropostaActivity : AppCompatActivity() {
     }
 
     private  fun  mostrarSelecionadorDeDatas (editText: EditText) {
-        val calendar = Calendar.getInstance()
-        // Criar um DatePickerDialog
+        val calendario = Calendar.getInstance()
         val selecionadorDeDataDialog = DatePickerDialog(
-            this , { _, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-                // Criar uma nova instância de calendário para armazenar a data selecionada
-                val selectedDate = calendar
-                // Definir a data selecionada usando os valores recebidos da caixa de diálogo DatePicker
-                selectedDate.set(year, monthOfYear, dayOfMonth)
-                // Cria um SimpleDateFormat para formatar a data como "dd/MM/aaaa"
-                // Formata a data selecionada em uma string
-                val formattedDate = ConversorDeDatas().converterCalendarParaString(selectedDate)
-                // Atualiza o TextView para exibir a data selecionada com o prefixo "Selected Date: "
+            this , { _, ano: Int, mes: Int, diaDoMes: Int ->
+                calendario.set(ano, mes, diaDoMes)
+                val formattedDate = ConversorDeDatas().converterCalendarParaString(calendario)
                 editText.setText(formattedDate)
             },
-            calendar. get(Calendar.YEAR),
-            calendar. get(Calendar.MONTH),
-            calendar. get(Calendar.DAY_OF_MONTH)
+            calendario.get(Calendar.YEAR),
+            calendario.get(Calendar.MONTH),
+            calendario.get(Calendar.DAY_OF_MONTH)
         )
-        // Mostrar a caixa de diálogo DatePicker
         selecionadorDeDataDialog.show()
     }
 }

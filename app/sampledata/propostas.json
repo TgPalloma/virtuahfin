@@ -1,0 +1,20 @@
+{
+  "proposta": [
+    {
+      "cliente": "Palloma Tech",
+      "assistente": "Palloma Muller",
+      "parceiro": "Ana Paula da Silva",
+      "horasdiaria": "2 horas"
+    },
+    {
+      "cliente": "Gestor",
+      "assistente": "Palloma Muller",
+      "horasdiaria": "3 horas"
+    },
+    {
+      "cliente": "PetSize",
+      "assistente": "Palloma Muller",
+      "horasdiaria": "6 horas"
+    }
+  ]
+}
