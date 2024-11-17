@@ -39,7 +39,7 @@
                     android:id="@+id/cadastro_proposta_auto_complete_cliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/cliente"
+                    android:hint="@string/escolher_cliente"
                     android:inputType="none"
                     android:outlineProvider="background" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +87,7 @@
                     android:id="@+id/cadastro_proposta_auto_complete_assistente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/assistente"
+                    android:hint="@string/escolher_assistente"
                     android:inputType="none"
                     android:outlineProvider="background" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -146,7 +146,7 @@
                     android:id="@+id/cadastro_proposta_auto_complete_parceiro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/parceiro"
+                    android:hint="@string/escolher_parceiro"
                     android:inputType="none"
                     android:outlineProvider="background" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -315,7 +315,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/cadastro_proposta_til_descricao"
                 app:layout_constraintEnd_toEndOf="@id/cadastro_proposta_til_descricao"
-                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_data_previsao_termino"
+                app:layout_constraintTop_toBottomOf="@id/cadastro_proposta_til_data_inicio"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

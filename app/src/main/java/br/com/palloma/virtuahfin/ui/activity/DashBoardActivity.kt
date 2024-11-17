@@ -59,11 +59,11 @@ class DashBoardActivity : AppCompatActivity() {
         }
 
         btGestaoDeProposta.setOnClickListener {
-            startActivity(Intent(this, CadastrarPropostaActivity::class.java))
+            startActivity(Intent(this, ListaPropostaActivity::class.java))
         }
 
         btRegistroDiario.setOnClickListener {
-            avisoNaoImplementado.show()
+            startActivity(Intent(this, PropostaActivity::class.java))
         }
 
         btAreaDeFinancas.setOnClickListener {

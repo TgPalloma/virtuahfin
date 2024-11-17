@@ -17,12 +17,12 @@
     <string name="cadastrado_em">Cadastrado em</string>
     <string name="status">Status</string>
     <string name="editar">Editar</string>
-    <string name="cliente">Escolher Cliente</string>
-    <string name="assistente">Escolher Assistente</string>
+    <string name="escolher_cliente">Escolher Cliente</string>
+    <string name="escolher_assistente">Escolher Assistente</string>
     <string name="valor_cliente">Valor do Cliente</string>
     <string name="valor_assistente">Valor da Assistente</string>
     <string name="valor_parceiro">Valor do Parceiro</string>
-    <string name="parceiro">Escolher Parceiro de Negócios</string>
+    <string name="escolher_parceiro">Escolher Parceiro de Negócios</string>
     <string name="adicionar_parceiro_comercial">Adicionar um Parceiro Comercial</string>
     <string name="cadastrar_proposta">Cadastrar Proposta</string>
     <string name="data_prevista_para_termino">Data Prev. Final</string>
@@ -30,4 +30,9 @@
     <string name="forma_de_pagamento">Forma de Pagamento</string>
     <string name="horas_dia">Horas/dia</string>
     <string name="descricao_do_servico">Descrição do Serviço</string>
+    <string name="cliente">Cliente</string>
+    <string name="assistente">Assistente</string>
+    <string name="parceiro">Parceiro</string>
+    <string name="data_prev_final">Data Prev. Final</string>
+    <string name="dias_totais">Dias Totais</string>
 </resources>

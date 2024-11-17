@@ -5,8 +5,8 @@ import java.time.LocalDate
 class Proposta(
     val cliente: PessoaJuridica,
     val assistente: PessoaJuridica,
-    val valorCliente: Double,
-    val valorAssistente: Double,
+    val valorCliente: Float,
+    val valorAssistente: Float,
     val descricaoServico: String,
     val dataInicio: LocalDate,
     val horasDiarias: Int,
@@ -14,10 +14,18 @@ class Proposta(
 ) {
 
     var parceiro: PessoaJuridica? = null
-    var valorParceiro: Double? = null
+    var valorParceiro: Float? = null
 
     var dataFinalPrevista: LocalDate? = null
     var dataFinalizaçao: LocalDate? = null
 
-    var statusAtivo: Boolean? = null
+    override fun toString(): String {
+        return "Proposta(cliente=$cliente, assistente=$assistente, valorCliente=$valorCliente,\n" +
+                "valorAssistente=$valorAssistente, descricaoServico='$descricaoServico',\n" +
+                "dataInicio=$dataInicio, horasDiarias=$horasDiarias, formaPagamento=$formaPagamento,\n" +
+                "parceiro=$parceiro, valorParceiro=$valorParceiro, dataFinalPrevista=$dataFinalPrevista,\n" +
+                "dataFinalizaçao=$dataFinalizaçao)"
+    }
+
+
 }

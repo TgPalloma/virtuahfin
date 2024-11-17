@@ -28,16 +28,23 @@ class PropostaDao {
     fun calcularDiasRestantes(proposta: Proposta): String  {
 
         if (verificaStatus(proposta)) {
+
+            if(proposta.dataInicio.isBefore(LocalDate.now())) {
+                val dataDeInicio = ConversorDeDatas().converterLocalDateParaString(proposta.dataInicio)
+                return "Proposta será iniciada em $dataDeInicio"
+            }
             if (proposta.dataFinalPrevista != null) {
-                val diasRestantes = proposta.dataFinalPrevista!!.until(LocalDate.now(), ChronoUnit.DAYS).toInt()
+                val diasRestantes = LocalDate.now()!!.until(proposta.dataFinalPrevista, ChronoUnit.DAYS).toInt()
                 return "Encerra em $diasRestantes corridos"
+
             } else {
                 return "Sem previsão de Encerramento (Proposta Ativa)"
+
             }
         } else {
             val dataFinalizada = ConversorDeDatas().converterLocalDateParaString(proposta.dataFinalizaçao)
             return "Proposta finalizada em $dataFinalizada"
+
         }
     }
-
 }

@@ -67,4 +67,10 @@ class ListaPropostaAdapter(propostas: List<Proposta>, private val context: Conte
     override fun getItemCount(): Int {
         return listaPropostas.size
     }
+
+    fun atualiza(listaPropostas: List<Proposta>) {
+        this.listaPropostas.clear()
+        this.listaPropostas.addAll(listaPropostas)
+        notifyDataSetChanged()
+    }
 }

@@ -4,6 +4,5 @@ enum class FormaDePagamento {
 
     SEMANAL,
     MENSAL,
-    PARCELADO
 
 }

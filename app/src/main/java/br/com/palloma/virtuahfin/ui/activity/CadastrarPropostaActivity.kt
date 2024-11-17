@@ -6,9 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -16,12 +16,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.com.palloma.virtuahfin.R
 import br.com.palloma.virtuahfin.dao.PessoaJuridicaDao
+import br.com.palloma.virtuahfin.dao.PropostaDao
 import br.com.palloma.virtuahfin.databinding.ActivityCadastrarPropostaBinding
 import br.com.palloma.virtuahfin.model.FormaDePagamento
 import br.com.palloma.virtuahfin.model.PessoaJuridica
+import br.com.palloma.virtuahfin.model.Proposta
 import br.com.palloma.virtuahfin.model.TipoContrato
 import br.com.palloma.virtuahfin.util.ConversorDeDatas
 import com.google.android.material.textfield.TextInputLayout
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import java.util.Calendar
 
 class CadastrarPropostaActivity : AppCompatActivity() {
@@ -30,7 +34,13 @@ class CadastrarPropostaActivity : AppCompatActivity() {
         ActivityCadastrarPropostaBinding.inflate(layoutInflater)
     }
 
+//    private val minimoDiasProposta = 30
+
     private val pessoaJuridicaDao = PessoaJuridicaDao()
+
+    private var cliente: PessoaJuridica? = null
+    private var assistente: PessoaJuridica? = null
+    private var parceiro: PessoaJuridica? = null
 
     private val listaClientes = ArrayList<PessoaJuridica>()
     private val listaAssistentes = ArrayList<PessoaJuridica>()
@@ -47,6 +57,13 @@ class CadastrarPropostaActivity : AppCompatActivity() {
 
     private lateinit var checkParceiro: CheckBox
 
+    private lateinit var tilCliente: TextInputLayout
+    private lateinit var tilValorCliente: TextInputLayout
+    private lateinit var tilAssistente: TextInputLayout
+    private lateinit var tilValorAssistente: TextInputLayout
+    private lateinit var tilDescricao: TextInputLayout
+    private lateinit var tilHoraDiaria: TextInputLayout
+    private lateinit var tilFormaDePagamento: TextInputLayout
     private lateinit var tilParceiro: TextInputLayout
     private lateinit var tilValorParceiro: TextInputLayout
     private lateinit var tilDataDeInicio: TextInputLayout
@@ -54,7 +71,8 @@ class CadastrarPropostaActivity : AppCompatActivity() {
 
     private lateinit var etValorCliente: EditText
     private lateinit var etValorAssistente: EditText
-    private lateinit var etValoParceiro: EditText
+    private lateinit var etValorParceiro: EditText
+    private lateinit var etDescricao: EditText
     private lateinit var etDataDeInicio: EditText
     private lateinit var etDataPrevFinal: EditText
 
@@ -77,24 +95,124 @@ class CadastrarPropostaActivity : AppCompatActivity() {
         configuraListaTiposDePagamento()
         configuraListaHorasDiarias()
         listenerHoraEFormaDePagamento()
+        
+        clickListenerDatas(tilDataDeInicio, etDataDeInicio)
+        clickListenerDatas(tilDataPrevFinal, etDataPrevFinal)
 
-        tilDataDeInicio.setEndIconOnClickListener {
-            mostrarSelecionadorDeDatas(etDataDeInicio)
+        listenerSelecionaCliente()
+        listenerSelecionaAssistente()
+        listenerSelecionaParceiro()
+
+        listenerRemoveError(tilDataDeInicio)
+        listenerRemoveError(tilDataPrevFinal)
+
+        btCadastrarProposta.setOnClickListener {
+
+            tilCliente.error = null
+            tilValorCliente.error = null
+            tilAssistente.error = null
+            tilValorAssistente.error = null
+            tilDescricao.error = null
+            tilHoraDiaria.error = null
+
+            val valorCliente = etValorCliente.text.toString()
+            val valorAssistente = etValorAssistente.text.toString()
+            val valorParceiro = etValorParceiro.text.toString()
+            val descricao = etDescricao.text.toString()
+            val dataInicio = etDataDeInicio.text.toString()
+            val dataPrevFinal = etDataPrevFinal.text.toString()
+
+            val horaDiaria = actvHorasDiarias.text.toString()
+            val formaPagamento = actvFormaDePagamento.text.toString()
+
+            if (cliente == null) {
+                tilCliente.error = "Selecione um cliente"
+
+            } else if (valorCliente.isEmpty()) {
+                tilValorCliente.error = "Defina o valor a ser pago pelo cliente"
+
+            } else if (assistente == null) {
+                tilAssistente.error = "Selecione uma assistente para a proposta"
+
+            } else if (valorAssistente.isEmpty().or(valorAssistente.toFloat() > valorCliente.toFloat())) {
+                if (valorAssistente.isEmpty()) tilValorAssistente.error = "Defina o pagamento para a assistente"
+                if ((valorAssistente.toFloat() > valorCliente.toFloat())) tilValorAssistente.error = "Assistente não pode ganhar mais que o cliente paga" else TODO()
+
+            } else if (descricao.isEmpty()) {
+                tilDescricao.error = "Descreva o serviço a ser realizado"
+
+            } else if (horaDiaria == null) {
+                tilHoraDiaria.error = "Defina de quantas horas será a proposta"
+
+            } else if (formaPagamento.isEmpty()) {
+                tilFormaDePagamento.error = "Defina a forma de pagamento"
+
+            } else if (dataInicio.isEmpty().or(
+                    ConversorDeDatas().converterStringParaLocalDate(dataInicio).isBefore(LocalDate.now()))) {
+
+                if (dataInicio.isEmpty()) tilDataDeInicio.error = "Selecione uma data para inicio da proposta"
+                if (ConversorDeDatas().converterStringParaLocalDate(dataInicio).isBefore(LocalDate.now()))
+                    tilDataDeInicio.error = "Prposta não pode ser iniciada retroativamente" else TODO()
+//
+//            } else if ((dataPrevFinal != null).and(calculaPeriodoMinimo(dataInicio, dataPrevFinal))) {
+//                tilDataPrevFinal.error = "Período mínimo de 30 dias"
+//
+            } else {
+                val proposta = Proposta(
+                    cliente!!,
+                    assistente!!,
+                    valorCliente.toFloat(),
+                    valorAssistente.toFloat(),
+                    descricao,
+                    ConversorDeDatas().converterStringParaLocalDate(dataInicio),
+                    horaDiaria.toInt(),
+                    FormaDePagamento.valueOf(formaPagamento)
+                )
+
+                if (dataPrevFinal.isEmpty()) {
+                } else proposta.dataFinalPrevista = ConversorDeDatas().converterStringParaLocalDate(dataPrevFinal)
+
+                PropostaDao().salvarProposta(proposta)
+                finish()
+            }
         }
+    }
 
-        tilDataPrevFinal.setEndIconOnClickListener {
-            mostrarSelecionadorDeDatas(etDataPrevFinal)
+    private fun calculaPeriodoMinimo(dataInicio: String, dataPrevFinal: String): Boolean {
+
+        val lcDataInicio: LocalDate = ConversorDeDatas().converterStringParaLocalDate(dataInicio)
+        val lcDataPrevFinal: LocalDate = ConversorDeDatas().converterStringParaLocalDate(dataPrevFinal)
+        val dias = lcDataInicio.until(lcDataPrevFinal, ChronoUnit.DAYS).toString().toInt()
+        Log.d("PeriodoMinimo", dias.toString())
+
+        return dias < 29
+    }
+
+    private fun alertaDeTela(mensagem: String) {
+        Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show()
+    }
+
+    private fun listenerSelecionaParceiro() {
+        actvParceiros.setOnItemClickListener { _, _, position, _ ->
+            parceiro = listaParceiros[position]
+            Log.d("parceiroListener", parceiro.toString())
         }
+    }
 
-        var cliente: PessoaJuridica
+    private fun listenerSelecionaAssistente() {
+        tilAssistente.error = null
+        actvAssistentes.setOnItemClickListener { _, _, position, _ ->
+            assistente = listaAssistentes[position]
+            Log.d("assistenteListener", assistente.toString())
+        }
+    }
 
-        btCadastrarProposta = binding.cadastroPropostaBotaoCadastrarProposta
-
+    private fun listenerSelecionaCliente() {
+        tilCliente.error = null
         actvClientes.setOnItemClickListener { _, _, position, _ ->
             cliente = listaClientes[position]
-            Log.d("cliente", cliente.cnpj + " |\n " + cliente.toString())
+            Log.d("clienteListener", cliente.toString())
         }
-
     }
 
     override fun onResume() {
@@ -104,12 +222,6 @@ class CadastrarPropostaActivity : AppCompatActivity() {
         configuraListaHorasDiarias()
         listenerHoraEFormaDePagamento()
 
-    }
-
-    private fun checkSwitchParceiro() {
-        checkParceiro.setOnCheckedChangeListener { _, isChecked ->
-            configuraViewsParceiro(isChecked)
-        }
     }
 
     private fun configuraListasPessoaJuridica() {
@@ -127,6 +239,13 @@ class CadastrarPropostaActivity : AppCompatActivity() {
 
         checkParceiro = binding.cadastroPropostaCheckboxParceiro
 
+        tilCliente = binding.cadastroPropostaTilCliente
+        tilValorCliente = binding.cadastroPropostaTilValorCliente
+        tilAssistente = binding.cadastroPropostaTilAssistente
+        tilValorAssistente = binding.cadastroPropostaTilValorAssistente
+        tilDescricao = binding.cadastroPropostaTilDescricao
+        tilHoraDiaria = binding.cadastroPropostaTilHoraDiaria
+        tilFormaDePagamento = binding.cadastroPropostaTilFormaPagamento
         tilParceiro = binding.cadastroPropostaTilParceiro
         tilValorParceiro = binding.cadastroPropostaTilValorParceiro
         tilDataDeInicio = binding.cadastroPropostaTilDataInicio
@@ -134,9 +253,12 @@ class CadastrarPropostaActivity : AppCompatActivity() {
 
         etValorCliente = binding.cadastroPropostaValorCliente
         etValorAssistente = binding.cadastroPropostaValorAssistente
-        etValoParceiro = binding.cadastroPropostaValorParceiro
+        etValorParceiro = binding.cadastroPropostaValorParceiro
+        etDescricao = binding.cadastroPropostaDescricao
         etDataDeInicio = binding.cadastroPropostaAutoDataInicio
         etDataPrevFinal = binding.cadastroPropostaAutoDataPrevisaoTermino
+
+        btCadastrarProposta = binding.cadastroPropostaBotaoCadastrarProposta
     }
 
     private fun configuraAdaptersNasViews() {
@@ -171,6 +293,12 @@ class CadastrarPropostaActivity : AppCompatActivity() {
     private fun configuraListaHorasDiarias() {
         val arrayAdapter = ArrayAdapter(this, R.layout.list_item, listaHorasDia)
         actvHorasDiarias.setAdapter(arrayAdapter)
+    }
+
+    private fun checkSwitchParceiro() {
+        checkParceiro.setOnCheckedChangeListener { _, isChecked ->
+            configuraViewsParceiro(isChecked)
+        }
     }
 
     private fun configuraViewsParceiro (visivel: Boolean) {
@@ -212,5 +340,19 @@ class CadastrarPropostaActivity : AppCompatActivity() {
             calendario.get(Calendar.DAY_OF_MONTH)
         )
         selecionadorDeDataDialog.show()
+    }
+
+    private fun listenerRemoveError (textInputLayout: TextInputLayout) {
+        textInputLayout.setErrorIconOnClickListener {
+            textInputLayout.error = null
+        }
+    }
+
+    private fun clickListenerDatas (
+        textInputLayout: TextInputLayout,
+        editText: EditText) {
+        textInputLayout.setEndIconOnClickListener {
+            mostrarSelecionadorDeDatas(editText)
+        }
     }
 }
