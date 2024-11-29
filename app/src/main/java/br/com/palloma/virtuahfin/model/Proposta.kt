@@ -1,5 +1,6 @@
 package br.com.palloma.virtuahfin.model
 
+import java.io.Serializable
 import java.time.LocalDate
 
 class Proposta(
@@ -11,7 +12,7 @@ class Proposta(
     val dataInicio: LocalDate,
     val horasDiarias: Int,
     val formaPagamento: FormaDePagamento
-) {
+) : Serializable {
 
     var parceiro: PessoaJuridica? = null
     var valorParceiro: Float? = null

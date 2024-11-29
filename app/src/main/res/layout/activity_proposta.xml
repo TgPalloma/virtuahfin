@@ -23,65 +23,102 @@
             app:cardCornerRadius="12dp"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/cardview_campo_informacoes"
-                android:elevation="5dp"
-                android:padding="8dp">
+                android:background="@drawable/cardview_campo_informacoes">
+
+                <ImageView
+                    android:id="@+id/visualizar_proposta_ivnoused_info_partes"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:background="@color/yellow_700"
+                    android:importantForAccessibility="no"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Informações das Partes da Proposta"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/visualizar_proposta_ivnoused_info_partes"
+                    app:layout_constraintEnd_toEndOf="@id/visualizar_proposta_ivnoused_info_partes"
+                    app:layout_constraintTop_toTopOf="@id/visualizar_proposta_ivnoused_info_partes"
+                    app:layout_constraintBottom_toBottomOf="@id/visualizar_proposta_ivnoused_info_partes"/>
+
+                <TextView
+                    android:id="@+id/visualizar_proposta_title_cliente"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:textStyle="bold"
-                    android:layout_marginStart="10dp"
-                    android:text="@string/cliente"/>
+                    android:layout_marginHorizontal="18dp"
+                    android:text="@string/cliente"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_ivnoused_info_partes"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
                 <TextView
                     android:id="@+id/visualizar_proposta_cliente"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:layout_marginStart="10dp"
                     android:textColor="@color/black"
-                    tools:text="@sample/pjs.json/pessoajuridica/razaosocial"/>
+                    tools:text="@sample/pjs.json/pessoajuridica/razaosocial"
+                    app:layout_constraintStart_toStartOf="@id/visualizar_proposta_title_cliente"
+                    app:layout_constraintEnd_toEndOf="@id/visualizar_proposta_title_cliente"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_title_cliente"/>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/visualizar_proposta_title_assistente"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginStart="10dp"
-                    android:text="@string/assistente"/>
+                    android:layout_marginTop="10dp"
+                    android:text="@string/assistente"
+                    app:layout_constraintStart_toStartOf="@id/visualizar_proposta_title_cliente"
+                    app:layout_constraintEnd_toEndOf="@id/visualizar_proposta_title_cliente"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_cliente"/>
 
                 <TextView
                     android:id="@+id/visualizar_proposta_assistente"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:layout_marginStart="10dp"
                     android:textColor="@color/black"
-                    tools:text="Palloma LTDA"/>
+                    tools:text="Palloma LTDA"
+                    app:layout_constraintStart_toStartOf="@id/visualizar_proposta_title_assistente"
+                    app:layout_constraintEnd_toEndOf="@id/visualizar_proposta_title_assistente"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_title_assistente"/>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/visualizar_proposta_title_parceiro"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginStart="10dp"
-                    android:text="@string/parceiro"/>
+                    android:layout_marginTop="10dp"
+                    android:text="@string/parceiro"
+                    app:layout_constraintStart_toStartOf="@id/visualizar_proposta_title_assistente"
+                    app:layout_constraintEnd_toEndOf="@id/visualizar_proposta_title_assistente"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_assistente"/>
 
                 <TextView
                     android:id="@+id/visualizar_proposta_parceiro"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:textSize="18sp"
-                    android:layout_marginStart="10dp"
                     android:textColor="@color/black"
-                    tools:text="Um Parceiro aqui"/>
+                    tools:text="Um Parceiro aqui"
+                    app:layout_constraintStart_toStartOf="@id/visualizar_proposta_title_parceiro"
+                    app:layout_constraintEnd_toEndOf="@id/visualizar_proposta_title_parceiro"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_title_parceiro"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -89,10 +126,11 @@
             android:id="@+id/visualizar_proposta_cardview_periodo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginHorizontal="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_cardview_partes_juridicas"
-            android:layout_margin="12dp"
             app:cardCornerRadius="12dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,16 +138,37 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/cardview_campo_informacoes"
-                android:elevation="5dp"
-                android:padding="8dp">
+                android:elevation="5dp">
+
+                <ImageView
+                    android:id="@+id/visualizar_proposta_ivnoused_info_periodo"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:background="@color/yellow_700"
+                    android:importantForAccessibility="no"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Informações de Período"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@+id/visualizar_proposta_ivnoused_info_periodo"
+                    app:layout_constraintEnd_toEndOf="@+id/visualizar_proposta_ivnoused_info_periodo"
+                    app:layout_constraintTop_toTopOf="@+id/visualizar_proposta_ivnoused_info_periodo"
+                    app:layout_constraintBottom_toBottomOf="@+id/visualizar_proposta_ivnoused_info_periodo"/>
 
                 <TextView
                     android:id="@+id/visualizar_proposta_tvtitle_data_inicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/data_de_inicio"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_ivnoused_info_periodo"
                     app:layout_constraintStart_toStartOf="parent"/>
 
                 <TextView
@@ -148,7 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="18dp"
                     android:text="@string/data_prev_final"
                     app:layout_constraintTop_toTopOf="@id/visualizar_proposta_tvtitle_data_inicio"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -164,52 +223,226 @@
                     app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_tvtitle_data_prev_final"/>
 
                 <TextView
+                    android:id="@+id/visualizar_proposta_tvtitle_data_finalizacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/data_de_finalizacao"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_dias_totais"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/visualizar_proposta_data_finalizacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:visibility="gone"
+                    android:text="22/10/2024"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_tvtitle_data_finalizacao"
+                    app:layout_constraintStart_toStartOf="@id/visualizar_proposta_tvtitle_data_inicio"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
                     android:id="@+id/visualizar_proposta_tvtitle_descricao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
                     android:text="@string/descricao_do_servico"
-                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_data_inicio"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_data_finalizacao"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginBottom="10dp"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="Qualquer coisa escrita aqui como descricao para a experiencia de visualização"
                     app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_tvtitle_descricao"
-                    app:layout_constraintStart_toStartOf="@id/visualizar_proposta_data_inicio"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/visualizar_proposta_informacoes"
+            android:id="@+id/visualizar_proposta_cardview_informacoes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginHorizontal="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_cardview_periodo"
-            android:layout_margin="12dp"
             app:cardCornerRadius="12dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@drawable/cardview_campo_informacoes"
-                android:elevation="5dp"
-                android:padding="8dp">
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/visualizar_proposta_ivnoused_info_pagamentos"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:background="@color/yellow_700"
+                    android:importantForAccessibility="no"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/informacoes_de_pagamentos"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/visualizar_proposta_ivnoused_info_pagamentos"
+                    app:layout_constraintEnd_toEndOf="@id/visualizar_proposta_ivnoused_info_pagamentos"
+                    app:layout_constraintTop_toTopOf="@id/visualizar_proposta_ivnoused_info_pagamentos"
+                    app:layout_constraintBottom_toBottomOf="@id/visualizar_proposta_ivnoused_info_pagamentos"/>
+
+                <TextView
+                    android:id="@+id/visualizar_proposta_horas_diarias"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="2 horas"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    app:drawableTopCompat="@drawable/ic_relogio"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_ivnoused_info_pagamentos"/>
+
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginVertical="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_horas_diarias"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TableRow>
+                        <TextView
+                            android:layout_weight="2"/>
+                        <TextView
+                            android:text="Por Hora"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:text="Semanal"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:text="Mensal"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                    </TableRow>
+                    <TableRow
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:layout_weight="2"
+                            android:text="@string/cliente"/>
+                        <TextView
+                            android:id="@+id/visualizar_proposta_cliente_p_hora"
+                            android:text="R$ 35,00"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:id="@+id/visualizar_proposta_cliente_p_semana"
+                            android:text="R$ 150,00"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:id="@+id/visualizar_proposta_cliente_p_mes"
+                            android:text="R$ 600,00"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                    </TableRow>
+                    <TableRow
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:layout_weight="2"
+                            android:text="@string/assistente"/>
+                        <TextView
+                            android:id="@+id/visualizar_proposta_assistente_p_hora"
+                            android:text="R$ 15,00"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:id="@+id/visualizar_proposta_assistente_p_semana"
+                            android:text="R$ 80,00"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:id="@+id/visualizar_proposta_assistente_p_mes"
+                            android:text="R$ 320,00"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                    </TableRow>
+                    <TableRow
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:layout_weight="2"
+                            android:text="@string/parceiro"/>
+                        <TextView
+                            android:id="@+id/visualizar_proposta_parceiro_p_hora"
+                            android:text="R$ 12,00"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:id="@+id/visualizar_proposta_parceiro_p_semana"
+                            android:text="R$ 30,00"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:id="@+id/visualizar_proposta_parceiro_p_mes"
+                            android:text="R$ 600,00"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:layout_weight="3"/>
+                    </TableRow>
+
+                </TableLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/visualizar_proposta_botao_cadastrar_proposta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:textStyle="bold"
+            android:background="@drawable/main_button_model"
+            android:text="Cadastrar Proposta"
+            app:layout_constraintStart_toStartOf="@id/visualizar_proposta_cardview_informacoes"
+            app:layout_constraintEnd_toEndOf="@id/visualizar_proposta_cardview_informacoes"
+            app:layout_constraintTop_toBottomOf="@id/visualizar_proposta_cardview_informacoes"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -35,4 +35,6 @@
     <string name="parceiro">Parceiro</string>
     <string name="data_prev_final">Data Prev. Final</string>
     <string name="dias_totais">Dias Totais</string>
+    <string name="data_de_finalizacao">Data de Finalização</string>
+    <string name="informacoes_de_pagamentos">Informações de Pagamentos</string>
 </resources>
